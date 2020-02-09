@@ -1,0 +1,21 @@
+#!/bin/bash
+
+valid_ip() {
+  echo "${@}" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' > /dev/null 2>&1
+}
+
+id=$1
+
+if valid_ip $id; then
+  inst_id=$(aws ec2 describe-instances --output=text --filters \
+    "Name=network-interface.addresses.association.public-ip,Values="$id"" \
+    --query 'Reservations[*].Instances[*].[InstanceId]')
+else
+  inst_id=$id
+fi
+
+if [ -z $inst_id ]; then
+  echo "No instance for address $ip_addr found."
+else
+  aws ssm start-session --target=$inst_id
+fi
