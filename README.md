@@ -1,6 +1,6 @@
 # SSM
 
-This tool allows you to connect to AWS instances using the `aws cli` tools without having to enable SSH.
+This tool allows you to connect to AWS instances using the `awscli` tools and Session Manager Plugin without having to enable SSH.
 This makes it easy to establish a session with your instance from anywhere (think VPN) using only your AWS credentials,
 without having to specify Security Group Inbound Rules for specific IP ranges.
 
@@ -10,6 +10,7 @@ If you wish to disable having an external IP altogether and still be able to acc
 However, that is out of scope here, so just [read the SSM documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html), and we will assume
 you are accessing an instance that has a public IP.
 
+- [Install AWS Session Manager Plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#install-plugin-macos)
 - Create a custom IAM Role, and attach the "AmazonEC2RoleforSSM" AWS managed policy to the role.
 - Associate the new IAM Role with your EC2 instance.
 - Enable SSH access in your instance's Security Group
